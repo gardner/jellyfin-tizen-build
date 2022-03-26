@@ -29,7 +29,8 @@ WORKDIR /tizen
 ADD ${TIZEN_STUDIO_URL} ${TIZEN_STUDIO_FILE}
 
 COPY --from=0 /jellyfin/jellyfin-tizen ./jellyfin-tizen
-COPY package /tizen/package
+COPY package.sh /tizen/package.sh
+COPY expect_script /tizen/expect_script
 
 RUN useradd tizen --home-dir /tizen && \
     chmod +x ${TIZEN_STUDIO_FILE} && \
@@ -42,17 +43,7 @@ USER tizen
 
 RUN ./web-cli_Tizen_Studio_4.5.1_ubuntu-64.bin --accept-license /tizen/tizen-studio && \
     rm ./web-cli_Tizen_Studio_4.5.1_ubuntu-64.bin && \
-    echo 'export PATH=$PATH:/tizen/tizen-studio/tools/ide/bin' >> .bashrc && \
-    export PATH=$PATH:/tizen/tizen-studio/tools/ide/bin && \
-    tizen certificate -a Gardner -p 1234 -c NZ -s Aukland -ct Aukland -o Tizen -n Gardner -e gardner@example.org -f tizencert && \
-    tizen security-profiles add -n Gardner -a /tizen/tizen-studio-data/keystore/author/tizencert.p12 -p 1234 && \
-    tizen cli-config "profiles.path=/tizen/tizen-studio-data/profile/profiles.xml" && \
-    sed -i 's/\/tizen\/tizen-studio-data\/keystore\/author\/tizencert.pwd/1234/g' /tizen/tizen-studio-data/profile/profiles.xml && \
-    sed -i 's/\/tizen\/tizen-studio-data\/tools\/certificate-generator\/certificates\/distributor\/tizen-distributor-signer.pwd/tizenpkcs12passfordsigner/g' /tizen/tizen-studio-data/profile/profiles.xml && \
-    sed -i 's/password=""/password="tizenpkcs12passfordsigner"/g' /tizen/tizen-studio-data/profile/profiles.xml && \
-    chmod 755 /tizen/tizen-studio-data/profile/profiles.xml && \
-    cd /tizen/jellyfin-tizen && \
-    tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+    echo 'export PATH=$PATH:/tizen/tizen-studio/tools/ide/bin' >> .bashrc
 
 VOLUME ["/output"]
-CMD /bin/bash -c "export PATH=$PATH:/tizen/tizen-studio/tools/ide/bin && /tizen/package"
+CMD /tizen/package.sh
