@@ -1,6 +1,6 @@
 # Overview
 
-This repository builds jellifin-tizen with three commands. The resulting file in places in the `output/` directory.
+This repository builds jellifin-tizen with three commands. The resulting file is placed in the `output/` directory.
 
 # Requirements
 
