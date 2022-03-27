@@ -15,7 +15,7 @@ RUN curl -sL ${JELLYFIN_WEB_URL} | tar -xz && \
     curl -sL ${JELLYFIN_TIZEN_URL} | tar -xz && \
     mv jellyfin-tizen-master jellyfin-tizen && \
     cd jellyfin-tizen && \
-    JELLYFIN_WEB_DIR=../jellyfin-web/dist yarn install
+    JELLYFIN_WEB_DIR=../jellyfin-web/dist npm ci --no-audit
 
 ## Build jellyfin app
 FROM adoptopenjdk/openjdk8
