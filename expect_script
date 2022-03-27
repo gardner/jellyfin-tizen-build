@@ -4,7 +4,7 @@ set timeout -1
 
 cd /tizen/jellyfin-tizen
 
-spawn tizen package -t wgt -o /output/ -s Gardner -- .buildResult
+spawn tizen package -t wgt -o /output/ -s Jellyfin -- .buildResult
 
 expect "Author password:"
 
