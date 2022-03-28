@@ -10,20 +10,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - uses: docker/build-push-action@v2
-        with:
-          tags: jellyfin-tizen-build:latest
-          push: false
-      - uses: addnab/docker-run-action@v3
-        with:
-          image: jellyfin-tizen-build:latest
-          options: -v ${{ github.workspace }}/output:/output
-          run: /tizen/package.sh
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Jellyfin.wgt
-          path: output/Jellyfin.wgt
+      - name: Display the environment variables and their values
+        run: |
+          node -v
+        shell: bash
+      # - uses: actions/upload-artifact@v3
+      #   with:
+      #     name: Jellyfin.wgt
+      #     path: output/Jellyfin.wgt
