@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -ex
 
 export PATH=$PATH:/tizen/tizen-studio/tools/ide/bin
 tizen certificate -a Jellyfin -p 1234 -c NZ -s Aukland -ct Aukland -o Tizen -n Jellyfin -e jellyfin@example.org -f tizencert

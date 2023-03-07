@@ -11,6 +11,7 @@ This repository builds jellifin-tizen with three commands. The resulting file is
     docker build -t jellyfin-tizen-build .
 
     mkdir -p output
+    touch output/.test || sudo chown $USER:$USER output
 
     docker run -v "$(pwd)/output":/output -it jellyfin-tizen-build
 
