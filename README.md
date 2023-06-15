@@ -8,12 +8,12 @@ This repository builds jellifin-tizen with three commands. The resulting file is
 
 ## Build process:
 
-    docker build -t jellyfin-tizen-build .
+    docker build --ulimit nofile=65536:65536 --progress=plain --no-cache -t jellyfin-tizen-build .
 
     mkdir -p output
     touch output/.test || sudo chown $USER:$USER output
 
-    docker run -v "$(pwd)/output":/output -it jellyfin-tizen-build
+    docker run --ulimit nofile=65536:65536 -v "$(pwd)/output":/output -it jellyfin-tizen-build
 
     ls -lah output/
     total 18488
@@ -39,7 +39,7 @@ On the TV:
 - Find the IP address of the TV by going to `Settings > General > Network > Network Status`
 
 ## Run the docker container to use sdb
-    docker run -v "$(pwd)"/output:/output -it jellyfin-tizen-build /bin/bash
+    docker run --ulimit nofile=65536:65536 -v "$(pwd)"/output:/output -it jellyfin-tizen-build /bin/bash
 
 ### Once inside the docker container issue:
 
