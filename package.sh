@@ -9,5 +9,6 @@ sed -i 's/\/tizen\/tizen-studio-data\/tools\/certificate-generator\/certificates
 sed -i 's/password=""/password="tizenpkcs12passfordsigner"/g' /tizen/tizen-studio-data/profile/profiles.xml
 chmod 755 /tizen/tizen-studio-data/profile/profiles.xml
 cd /tizen/jellyfin-tizen
-tizen build-web -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
+tizen cli-config default.build.configuration=Release
+tizen build-web --optimize -e ".*" -e gulpfile.js -e README.md -e "node_modules/*" -e "package*.json" -e "yarn.lock"
 /tizen/expect_script
